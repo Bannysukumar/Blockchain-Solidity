@@ -6,7 +6,7 @@ const value2 = document.getElementById("value2")
 
 const result = document.getElementById("result")
 
-const contractAddress = "0x393f51DFBc66239DF7AFDE54316A6CbFC5d3f7f2"
+const contractAddress = "0x66793032e92d4cdd1d0af0e536340c435b07c77f"
 const contractABI = [
 	{
 		"inputs": [
@@ -72,15 +72,15 @@ async function simpleSum() {
 }
 
 async function getValue() {
-
-	if(value1.value === "" || value2.value === ""){
-		alert("enter the values")
-	}
-	try{
-		const result = await contract.methods.getNumber().call();
-		result.textContent = result
-
-	}catch(err){
-		console.log("ERROR")
-	}
+    if(!userAccount){
+        alert("Please Connect the Wallet")
+        return;
+    }
+    try{
+        const sumResult = await contract.methods.getNumber().call();
+        result.textContent = sumResult;
+    }catch(err){
+        console.log("ERROR", err);
+        alert("Error occurred while getting the sum");
+    }
 }
